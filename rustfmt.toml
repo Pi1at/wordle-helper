@@ -1,0 +1,6 @@
+edition = "2021"
+# (optional) other config...
+imports_granularity = "Crate"
+max_width = 80
+format_strings = true
+group_imports = "One"

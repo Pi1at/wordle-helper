@@ -1,0 +1,33 @@
+{
+    "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
+    "rust-analyzer.cargo.features": "all",
+    "rust-analyzer.check.command": "clippy",
+    "editor.formatOnSave": true,
+    // https://twitter.com/sridca/status/1674947342607216641
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "emmet.includeLanguages": {
+        "rust": "html",
+        "*.rs": "html"
+    },
+    "tailwindCSS.includeLanguages": {
+        "rust": "html",
+        "*.rs": "html"
+    },
+    "files.associations": {
+        "*.css": "tailwindcss",
+        "*.rs": "rust"
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#10323B",
+        "titleBar.activeBackground": "#174652",
+        "titleBar.activeForeground": "#F5FBFC"
+    },
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "on",
+        "strings": true
+    },
+    "css.validate": false,
+    "vs-browser.url": "http://localhost:4242/wordle-helper",
+    "rust-analyzer.rustfmt.overrideCommand": ["leptosfmt", "--stdin", "--rustfmt"]
+}

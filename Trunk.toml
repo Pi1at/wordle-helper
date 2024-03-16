@@ -1,0 +1,3 @@
+# NOTE: after local version bump probably need some configuration https://trunkrs.dev/advanced/
+[build]
+#serve_base = "/wordle-helper/"

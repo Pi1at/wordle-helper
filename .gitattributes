@@ -1,0 +1,7 @@
+# Set the default behavior for all files.
+* text=auto eol=lf
+
+flake.lock linguist-generated=true
+
+# Normalized and converts to native line endings on checkout.
+*.rs text
