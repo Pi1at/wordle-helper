@@ -1,39 +1,47 @@
-[package]
-edition = "2021"
-name    = "wordle-helper"
-version = "0.1.0"
+[workspace]
+members  = ["gh-pages-app", "shared/wordlists"]
+resolver = "2"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace.package]
+authors     = ["Anatoly Chumakov"]
+description = "A wordle helper tools. Built with Leptos; Designed with Tailwind"
+edition     = "2021"
+license     = "MIT"
+version     = "0.1.0"
 
-[dependencies]
-derive_more = { version = "1.0.0-beta.6", features = ["display"] }
+[workspace.lints.rust]
+# unsafe_code = "forbid"
+# unused = "allow" # For experimental dev.
 
-# UI dependencies
-console_error_panic_hook = "0.1.7"
-console_log              = "1"
-copy_dir                 = "0.1.3"
-leptos                   = { version = "0.6.9", features = ["csr", "nightly"] }
-leptos-use               = "0.10.4"
-leptos_meta              = { version = "0.6.9", features = ["csr", "nightly"] }
-leptos_router            = { version = "0.6.9", features = ["csr", "nightly"] }
-leptos_theme             = "0.1.2"
-log                      = "0.4.21"
-styled                   = "0.2.0"
-stylist                  = "0.13.0"
+[workspace.lints.clippy]
+#cargo       = "warn"
+all         = "warn"
+complexity  = "warn"
+correctness = "deny"
+nursery     = "warn"
+pedantic    = "warn"
+perf        = "deny"
+style       = "warn"
+suspicious  = "warn"
 
-[features]
-csr = ["leptos/csr", "leptos_meta/csr", "leptos_router/csr", "styled/csr"]
-# utils
-# strum = { version = "0.25", features = ["derive", "strum_macros"] }
-# strum_macros = "0.25"
-
-[dev-dependencies]
-wasm-bindgen      = "*"
-wasm-bindgen-test = "*"
-web-sys           = { version = "*", features = ["Document", "Window"] }
+cast_possible_truncation = "warn"
 
 [profile.release]
 codegen-units = 1
 lto           = true
 opt-level     = 'z'
 panic         = "abort"
+strip         = true
+
+[profile.dev]
+codegen-units = 256
+lto           = "off"
+opt-level     = 0
+
+[workspace.dependencies]
+derive_more = { version = "1.0.0-beta.6", features = ["display"] }
+
+console_error_panic_hook = "0.1.7"
+
+leptos        = { version = "0.6.9", features = ["csr", "nightly"] }
+leptos_router = { version = "0.6.9", features = ["csr", "nightly"] }
