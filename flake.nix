@@ -38,6 +38,9 @@
           tailwindcss
           wasm-bindgen-cli
           binaryen
+          # dev tools
+          twiggy
+          cargo-wizard
         ];
         buildInputs = with pkgs; [ ];
       in
