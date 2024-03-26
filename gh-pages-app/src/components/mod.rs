@@ -26,10 +26,9 @@ pub fn WordleSolver() -> impl IntoView {
             // .map(|word| {
             // view! { <li>{word}</li> }
             // })
-            <ul>// .collect::<Vec<_>>()
+            // .collect::<Vec<_>>()
             // }}
-
-            </ul>
+            <ul></ul>
         </div>
     }
 }
