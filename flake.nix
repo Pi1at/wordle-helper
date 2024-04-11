@@ -33,6 +33,8 @@
           pkg-config
           leptosfmt
           cargo-generate
+          openssl
+          ncurses
           # trunk and tools
           trunk
           tailwindcss

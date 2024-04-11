@@ -14,19 +14,19 @@ workspace = true
 
 [dependencies]
 derive_more = { workspace = true }
+rand        = "*"
 
 console_error_panic_hook = { workspace = true }
 
-console_log          = "1"
-copy_dir             = "0.1.3"
-leptos-use           = "0.10.4"
-leptos_meta          = { version = "0.6.9", features = ["csr", "nightly"] }
-leptos_theme         = "0.1.2"
-log                  = "0.4.21"
-styled               = "0.2.0"
-stylist              = "0.13.0"
-unicode-segmentation = "1.11.0"
+console_log  = "1"
+copy_dir     = "0.1.3"
+leptos_meta  = { version = "0.6.9", features = ["csr", "nightly"] }
+leptos_theme = "0.1.2"
+log          = "0.4.21"
+styled       = "0.2.0"
+stylist      = "0.13.0"
 
+leptos-use    = { workspace = true }
 leptos_lucide = { workspace = true }
 
 [dependencies.leptos]

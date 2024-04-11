@@ -11,7 +11,7 @@ pub fn Settings() -> impl IntoView {
     view! {
         <div class="space-y-20">
             <div class="space-y-2">
-                <p class="">Current theme: {move || theme_signal.get().to_string()}</p>
+                // <p class="">Current theme: {move || theme_signal().to_string()}</p>
 
                 <div class="flex space-x-4">
                     <p>"Select theme: "</p>

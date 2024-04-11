@@ -1,5 +1,10 @@
 [workspace]
-members  = ["gh-pages-app", "shared/wordlists"]
+members = [
+    "gh-pages-app",
+    #"playground/*",
+    "shared/wordle-core",
+    "shared/wordlists",
+]
 resolver = "2"
 
 [workspace.package]
@@ -39,10 +44,15 @@ lto           = "off"
 opt-level     = 0
 
 [workspace.dependencies]
-derive_more = { version = "1.0.0-beta.6", features = ["display"] }
+derive_more          = { version = "1.0.0-beta.6", features = ["display"] }
+unicode-segmentation = "1.11.0"
+
+wordle-core = { version = "*", path = "./shared/wordle-core" }
+wordlists   = { version = "*", path = "./shared/wordlists" }
 
 console_error_panic_hook = "0.1.7"
 
 leptos        = { version = "0.6.9", features = ["csr", "nightly"] }
+leptos-use    = { version = "*" }
 leptos_lucide = "0.1.1"
 leptos_router = { version = "0.6.9", features = ["csr", "nightly"] }

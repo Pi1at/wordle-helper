@@ -1,0 +1,17 @@
+[package]
+name = "wordle-core"
+
+authors.workspace     = true
+description.workspace = true
+edition.workspace     = true
+license.workspace     = true
+version.workspace     = true
+
+[dependencies]
+
+unicode-segmentation = { workspace = true }
+
+wordlists = { workspace = true }
+
+[lints]
+workspace = true
