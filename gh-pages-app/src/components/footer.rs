@@ -9,7 +9,7 @@ pub fn Footer() -> impl IntoView {
 
     let footer_links: [(&'static str, String); 2] = [
         ("Contribute", REPO_LINK.to_string()),
-        ("Leave an issue", format!("{}/issues/new", REPO_LINK)),
+        ("Leave an issue", format!("{REPO_LINK}/issues/new")),
     ];
     view! {
         <div class="flex justify-center space-x-8">

@@ -46,7 +46,7 @@ jobs:
         run: npm install -D tailwindcss && npx tailwindcss -i ./input.css -o ./style/output.css  # run tailwind
 
       - name: Download and install Trunk binary
-        run: wget -qO- https://github.com/thedodd/trunk/releases/latest/download/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
+        run: cd ./gh-pages-app && wget -qO- https://github.com/thedodd/trunk/releases/latest/download/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
       - name: Build with Trunk
         # "${GITHUB_REPOSITORY#*/}" evaluates into the name of the repository
         # using --public-url something will allow trunk to modify all the href paths like from favicon.ico to repo_name/favicon.ico .
@@ -56,7 +56,7 @@ jobs:
         run: ./trunk build --release --public-url "/${GITHUB_REPOSITORY#*/}/"
       # for routing
       - name: Make 404.html file from index.html
-        run: cp -f ./dist/index.html ./dist/404.html
+        run: cp -f ../dist/index.html ../dist/404.html
 
       # Deploy to gh-pages branch
       # - name: Deploy 🚀
@@ -77,7 +77,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload dist dir
-          path: './dist'
+          path: '../dist'
 
       - name: Deploy to GitHub Pages 🚀
         id: deployment

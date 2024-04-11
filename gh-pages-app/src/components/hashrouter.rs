@@ -1,6 +1,7 @@
-use crate::pages::home::Home;
 use leptos::*;
 use leptos_router::use_location;
+
+use crate::pages::home::Home;
 
 #[component]
 pub fn HashRouter() -> impl IntoView {
@@ -9,7 +10,7 @@ pub fn HashRouter() -> impl IntoView {
         {move || {
             match hash_memo.get().as_str() {
                 "" => view! { <Home/> },
-                unknown_hash => format!("\"{}\" Route Not found", unknown_hash).into_view(),
+                unknown_hash => format!("\"{unknown_hash}\" Route Not found").into_view(),
             }
         }}
     }

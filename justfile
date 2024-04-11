@@ -3,13 +3,14 @@ default:
 
 # Run the project locally
 watch $RUST_BACKTRACE="1":
-    trunk serve --port 4242
+    cd ./gh-pages-app && trunk serve
 
 # build-tw:
 #     tailwindcss -c ./tailwind.config.js -i ./input.css -o ./style/output.css
 release:
-    trunk build --release
+    cd ./gh-pages-app && trunk build --release
 fmt:
-    leptosfmt ./**/*.rs
+    leptosfmt ./gh-pages-app/**/*.rs
+    leptosfmt ./shared/**/*.rs
 # watch-tw:
 #     tailwindcss -c ./tailwind.config.js -i ./input.css -o ./style/output.css --watch

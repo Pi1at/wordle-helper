@@ -1,12 +1,11 @@
-use derive_more::Display;
-use std::fmt::{self, Formatter};
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Ord, Eq, Display)]
+use std::{
+    collections::VecDeque,
+    fmt::{self, Display, Formatter},
+};
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Ord, Eq)]
 enum Position {
-    #[display("⬛")]
     Miss,
-    #[display("🟨")]
     Misplaced,
-    #[display("🟩")]
     Exact,
 }
 
@@ -74,41 +73,47 @@ impl Display for Pattern {
     }
 }
 
-fn pattern_from_string(pattern: &str) -> usize {
+#[must_use]
+pub fn pattern_from_string(pattern: &str) -> usize {
     pattern
         .chars()
-        .enumerate()
-        .map(|(i, c)| c as usize * 3_usize.pow(i as u32))
-        .sum()
+        .map(|c| match c {
+            'B' => 0usize,
+            'Y' => 1usize,
+            'G' => 2usize,
+            _ => panic!("fix later"),
+        })
+        .fold(0usize, |acc, v| acc * 3 + v)
 }
 
 fn pattern_to_int_list(pattern: usize) -> Vec<usize> {
-    let mut result = Vec::with_capacity(5);
+    let mut result = VecDeque::with_capacity(5);
     let mut curr = pattern;
     for _ in 0..5 {
-        result.push(curr % 3);
+        result.push_front(curr % 3);
         curr /= 3;
     }
-    result
+    Vec::from(result)
 }
 
-fn pattern_to_string(pattern: usize) -> String {
-    let d = ['⬛', '🟨', '🟩'];
-    pattern_to_int_list(pattern)
-        .into_iter()
-        .map(|i| d[i])
-        .collect()
+#[must_use]
+pub fn pattern_to_string(pattern: usize) -> String {
+    let d = ['B', 'Y', 'G'];
+    pattern_to_int_list(pattern).into_iter().map(|i| d[i]).collect()
 }
 #[derive(Debug)]
 struct Word {
     bytes: [u8; 5],
-    positions: [u8; 26], // bitmask of locations of that letter, e.g. for aabce, positions = 00011, 00100, 01000, 00000, 10000,....
+    /* bitmask of locations of that letter, e.g. for
+     * aabce, positions = 00011, 00100, 01000, 00000,
+     * 10000,.... */
+    positions: [u8; 26],
     unique_bytes: u32,
     w: String,
 }
 
 impl Word {
-    fn new(word: &'static str) -> Self {
+    fn new(word: &str) -> Self {
         let mut unique_bytes = 0;
         let mut bytes = [0; 5];
         for i in 0..5 {
@@ -119,24 +124,27 @@ impl Word {
         for (i, &b) in bytes.iter().enumerate() {
             positions[b as usize] |= 1 << (i as u8);
         }
-        Self {
-            bytes,
-            positions,
-            unique_bytes,
-            w: word.to_string(),
-        }
+        Self { bytes, positions, unique_bytes, w: word.to_string() }
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::jonathanolson::fast_score;
+
+    #[test]
+    fn test_name() {
+        dbg!(std::mem::size_of::<Pattern>());
+        dbg!(std::mem::size_of::<Option<Pattern>>());
+        dbg!(std::mem::size_of::<Position>());
+        dbg!(std::mem::size_of::<Option<Position>>());
+    }
 
     #[test]
     fn it_works() {
         dbg!('4'.to_digit(3));
-        let word = "hello";
-        println!("{}", Position::Misplaced);
+        //println!("{}", Position::Misplaced);
         println!(
             "{}",
             Pattern::from(&[
@@ -164,5 +172,14 @@ mod tests {
             common -= 1 << j;
         }
         assert_eq!(v_green, vec![0b11, 0b0]);
+    }
+
+    #[test]
+    fn test_pattern() {
+        dbg!(pattern_from_string("BBBYY"));
+        dbg!(pattern_to_string(fast_score("агент", "гольд") as usize));
+        dbg!(pattern_to_string(fast_score("коран", "агент") as usize));
+        dbg!(pattern_to_string(3));
+        dbg!(pattern_to_string(20));
     }
 }
